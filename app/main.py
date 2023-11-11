@@ -1,5 +1,5 @@
 from fastapi import FastAPI, HTTPException
-from pydantic import BaseModel, model_rebuild  # Import model_rebuild
+from pydantic import BaseModel
 
 import os
 from supabase import create_client, Client
@@ -69,6 +69,3 @@ def notify(body: NotificationBody):
 async def check(body: NotificationBody):
     push_tokens = await getUsersPushToken(body.userId)
     return {"push_tokens": push_tokens}
-
-# Apply model_rebuild to Pydantic models to suppress the warnings
-NotificationBody = model_rebuild(NotificationBody)
